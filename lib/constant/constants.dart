@@ -10,4 +10,5 @@ class AppConstant {
   );
   static String emailAddress = 'Email Address';
   static String password = 'Password';
+  static String register = 'Register';
 }

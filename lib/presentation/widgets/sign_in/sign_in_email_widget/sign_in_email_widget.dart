@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sample_authorize_app/constant/constants.dart';
 import 'package:sample_authorize_app/constant/keys.dart';
 import 'package:sample_authorize_app/presentation/widgets/sign_in/sign_in_email_widget/sign_in_email_widget_provider.dart';
+import 'package:sample_authorize_app/services/auth_service.dart';
 import 'package:sample_authorize_app/utils/extensions.dart';
 
 class SignInEmailWidget extends ConsumerStatefulWidget {
@@ -99,15 +101,27 @@ class _SignInEmailWidgetState extends ConsumerState<SignInEmailWidget> {
         ),
         const SizedBox(height: 16),
         GestureDetector(
-          onTap: () {
-            ref.read(signInEmailProvider.notifier).validateEmail(emailTextFieldController.value.text);
-            ref.read(signInEmailProvider.notifier).validatePassword(passwordTextFieldController.value.text);
-            if(validatePasswordErrorMessage.isNullOrEmpty() && validateEmailErrorMessage.isNullOrEmpty()){
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Logged in success !!!')),
-              );
-              passwordTextFieldController.clear();
-              emailTextFieldController.clear();
+          onTap: () async {
+            ref.read(signInEmailProvider.notifier).validateEmail(emailTextFieldController.text);
+            ref.read(signInEmailProvider.notifier).validatePassword(passwordTextFieldController.text);
+            try{
+              final signInResult = await authService.value.signIn(email: emailTextFieldController.text, password: passwordTextFieldController.text);
+              if(signInResult.user != null){
+                print('User signed in:');
+                print('User ID: ${signInResult.user?.uid}');
+                print('User Email: ${signInResult.user?.email}');
+                print('Display Name: ${signInResult.user?.displayName}');
+                print('Email Verified: ${signInResult.user?.emailVerified}');
+                print('Is New User: ${signInResult.additionalUserInfo?.isNewUser}');
+                print('Provider ID: ${signInResult.credential?.providerId}');
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('login successful !')),
+                );
+                passwordTextFieldController.clear();
+                emailTextFieldController.clear();
+              }
+            } on FirebaseAuthException catch(e){
+              print('signIn error : ${e.message}');
             }
           },
           child: Container(

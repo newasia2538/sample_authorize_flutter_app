@@ -1,0 +1,9 @@
+{
+  "common_resources" : {
+    "login" : "Login",
+    "log_out" : "Log Out"
+  },
+  "login_resources" : {
+    "or_log_in_with" : "Or log in with"
+  }
+}

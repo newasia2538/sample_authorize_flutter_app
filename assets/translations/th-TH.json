@@ -1,0 +1,9 @@
+{
+  "common_resources" : {
+    "login" : "เข้าสู่ระบบ",
+    "log_out" : "ออกจากระบบ"
+  },
+  "login_resources" : {
+    "or_log_in_with" : "Or log in with"
+  }
+}
