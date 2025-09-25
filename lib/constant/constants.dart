@@ -11,4 +11,7 @@ class AppConstant {
   static String emailAddress = 'Email Address';
   static String password = 'Password';
   static String register = 'Register';
+
+  // Secure storage key
+  static String tokenKey = 'firebase_id_token';
 }

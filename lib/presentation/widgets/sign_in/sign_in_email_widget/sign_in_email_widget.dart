@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sample_authorize_app/constant/constants.dart';
 import 'package:sample_authorize_app/constant/keys.dart';
+import 'package:sample_authorize_app/core/provider.dart';
 import 'package:sample_authorize_app/presentation/widgets/sign_in/sign_in_email_widget/sign_in_email_widget_provider.dart';
 import 'package:sample_authorize_app/services/auth_service.dart';
 import 'package:sample_authorize_app/utils/extensions.dart';
@@ -59,11 +60,6 @@ class _SignInEmailWidgetState extends ConsumerState<SignInEmailWidget> {
             hintText: 'Enter your email.',
             errorText: validateEmailErrorMessage,
           ),
-          onTapOutside: (value) {
-            if(validateEmailErrorMessage.isNullOrEmpty()) {
-              emailTextFieldController.clear();
-            }
-          },
         ),
         const SizedBox(height: 16),
         Text(
@@ -93,17 +89,13 @@ class _SignInEmailWidgetState extends ConsumerState<SignInEmailWidget> {
                       : Icon(Icons.visibility_off),
             ),
           ),
-          onTapOutside: (value) {
-            if(validatePasswordErrorMessage.isNullOrEmpty()) {
-              passwordTextFieldController.clear();
-            }
-          },
         ),
         const SizedBox(height: 16),
         GestureDetector(
           onTap: () async {
             ref.read(signInEmailProvider.notifier).validateEmail(emailTextFieldController.text);
             ref.read(signInEmailProvider.notifier).validatePassword(passwordTextFieldController.text);
+            if(validateEmailErrorMessage.isNotNullOrEmpty() || validatePasswordErrorMessage.isNotNullOrEmpty()) return;
             try{
               final signInResult = await authService.value.signIn(email: emailTextFieldController.text, password: passwordTextFieldController.text);
               if(signInResult.user != null){
@@ -114,9 +106,10 @@ class _SignInEmailWidgetState extends ConsumerState<SignInEmailWidget> {
                 print('Email Verified: ${signInResult.user?.emailVerified}');
                 print('Is New User: ${signInResult.additionalUserInfo?.isNewUser}');
                 print('Provider ID: ${signInResult.credential?.providerId}');
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('login successful !')),
-                );
+
+                final idToken = await signInResult.user?.getIdToken() ?? '';
+                if(mounted) ref.read(secureStorageProvider).saveValueByKey(AppConstant.tokenKey, idToken);
+
                 passwordTextFieldController.clear();
                 emailTextFieldController.clear();
               }
