@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sample_authorize_app/configurations/route_path.dart';
+import 'package:sample_authorize_app/gen/locale_keys.g.dart';
 import 'package:sample_authorize_app/presentation/widgets/sign_in/authorize_social_widget.dart';
 import 'package:sample_authorize_app/presentation/widgets/sign_in/sign_in_email_widget/sign_in_email_widget.dart';
 
@@ -21,12 +23,12 @@ class _SignInViewState extends ConsumerState<SignInView> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'Login',
+            'DEMO APP',
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500, color: appColor.secondary),
           ),
           Text(
-            'Welcome',
+            LocaleKeys.common_resources_welcome.tr(),
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 28, fontWeight: FontWeight.w400, color: Colors.grey),
           ),
@@ -35,7 +37,7 @@ class _SignInViewState extends ConsumerState<SignInView> {
           const SizedBox(height: 16),
           GestureDetector(
             child: Text(
-              'Forgotten your password ?',
+              LocaleKeys.login_resources_forgetten_youre_password_button_text.tr(),
               style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 12),
             ),
             onTap: (){

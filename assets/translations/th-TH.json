@@ -1,9 +1,14 @@
 {
   "common_resources" : {
     "login" : "เข้าสู่ระบบ",
-    "log_out" : "ออกจากระบบ"
+    "log_out" : "ออกจากระบบ",
+    "welcome" : "ยินดีต้อนรับ"
   },
   "login_resources" : {
-    "or_log_in_with" : "Or log in with"
+    "login_button_text" : "เข้าสู่ระบบ",
+    "forgetten_youre_password_button_text" : "ลืมรหัสผ่านเข้าสู้ระบบ ?",
+    "or_log_in_with" : "หรือ เข้าสู่ระบบด้วย",
+    "enter_your_email" : "ระบุ email",
+    "enter_your_password" : "ระบุ รหัสผ่านเข้าสู่ระบบ"
   }
 }

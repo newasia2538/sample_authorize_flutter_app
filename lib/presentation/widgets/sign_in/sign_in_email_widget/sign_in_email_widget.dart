@@ -1,12 +1,14 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sample_authorize_app/constant/constants.dart';
 import 'package:sample_authorize_app/constant/keys.dart';
+import 'package:sample_authorize_app/core/extensions/string_extensions.dart';
 import 'package:sample_authorize_app/core/provider.dart';
+import 'package:sample_authorize_app/gen/locale_keys.g.dart';
 import 'package:sample_authorize_app/presentation/widgets/sign_in/sign_in_email_widget/sign_in_email_widget_provider.dart';
 import 'package:sample_authorize_app/services/auth_service.dart';
-import 'package:sample_authorize_app/utils/extensions.dart';
 
 class SignInEmailWidget extends ConsumerStatefulWidget {
   const SignInEmailWidget({super.key});
@@ -57,7 +59,7 @@ class _SignInEmailWidgetState extends ConsumerState<SignInEmailWidget> {
           key: emailAddressTextFieldKey,
           controller: emailTextFieldController,
           decoration: InputDecoration(
-            hintText: 'Enter your email.',
+            hintText: LocaleKeys.login_resources_enter_your_email.tr(),
             errorText: validateEmailErrorMessage,
           ),
         ),
@@ -77,7 +79,7 @@ class _SignInEmailWidgetState extends ConsumerState<SignInEmailWidget> {
           keyboardType: TextInputType.visiblePassword,
           obscureText: !isShowPasswordText,
           decoration: InputDecoration(
-            hintText: 'Enter your password.',
+            hintText: LocaleKeys.login_resources_enter_your_password.tr(),
             errorText: validatePasswordErrorMessage,
             suffixIcon: IconButton(
               onPressed: () {
@@ -125,7 +127,8 @@ class _SignInEmailWidgetState extends ConsumerState<SignInEmailWidget> {
               color: Colors.black,
             ),
             child: Text(
-              'Login',
+              key: const Key('login_btn'),
+              LocaleKeys.login_resources_login_button_text.tr(),
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,

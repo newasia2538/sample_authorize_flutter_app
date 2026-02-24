@@ -1,9 +1,14 @@
 {
   "common_resources" : {
     "login" : "Login",
-    "log_out" : "Log Out"
+    "log_out" : "Log Out",
+    "welcome" : "Welcome"
   },
   "login_resources" : {
-    "or_log_in_with" : "Or log in with"
+    "login_button_text" : "Login",
+    "forgetten_youre_password_button_text" : "Forgotten your password?",
+    "or_log_in_with" : "Or log in with",
+    "enter_your_email" : "Enter your email.",
+    "enter_your_password" : "Enter your password."
   }
 }

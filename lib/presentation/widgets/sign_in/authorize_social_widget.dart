@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sample_authorize_app/core/extensions/string_extensions.dart';
 
 class AuthorizeSocialWidget extends ConsumerStatefulWidget {
   const AuthorizeSocialWidget({super.key});
@@ -24,8 +25,10 @@ class _AuthorizeSocialWidgetState extends ConsumerState<AuthorizeSocialWidget> {
   }
 
   Widget _generateSocialButton(String iconPath, Function() callBack) {
+    final keyValue = iconPath.between('assets/images/logos/', '.svg') ?? '';
     return GestureDetector(
       child: Container(
+        key: new Key(keyValue),
         padding: EdgeInsets.all(8.0),
         decoration: BoxDecoration(
           border: Border.all(strokeAlign: BorderSide.strokeAlignOutside),

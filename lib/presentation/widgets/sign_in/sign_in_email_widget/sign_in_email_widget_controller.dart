@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:sample_authorize_app/constant/constants.dart';
+import 'package:sample_authorize_app/core/extensions/string_extensions.dart';
 import 'package:sample_authorize_app/presentation/widgets/sign_in/sign_in_email_widget/sign_in_email_widget_state.dart';
-import 'package:sample_authorize_app/utils/extensions.dart';
 
 class SignInEmailWidgetController extends StateNotifier<SignInEmailWidgetState> {
   SignInEmailWidgetController() : super(SignInEmailWidgetState());

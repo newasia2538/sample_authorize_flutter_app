@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sample_authorize_app/utils/extensions.dart';
+import 'package:sample_authorize_app/core/extensions/extensions.dart';
 
 final GlobalKey progressDialog = GlobalKey<NavigatorState>();
 
@@ -25,8 +25,7 @@ showProgress(BuildContext context) async {
       context: context,
       barrierDismissible: false,
       builder: (mContext) {
-        return WillPopScope(
-          onWillPop: () async => false,
+        return PopScope(
           child: Center(
             key: progressDialog,
             child: CircularProgress(),
