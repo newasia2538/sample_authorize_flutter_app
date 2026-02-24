@@ -1,15 +1,5 @@
 import 'package:flutter/material.dart';
 
-extension StringExtensions on String?{
-  bool isNullOrEmpty(){
-    return this == null || this!.isEmpty;
-  }
-
-  bool isNotNullOrEmpty(){
-    return !isNullOrEmpty();
-  }
-}
-
 extension NavigatorNullableExtension on BuildContext? {
   bool canPop() {
     if (this == null) {

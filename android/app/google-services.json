@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "702956114690",
+    "project_id": "sample-authorize-app",
+    "storage_bucket": "sample-authorize-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:702956114690:android:d428efbe48cbfabae4a81b",
+        "android_client_info": {
+          "package_name": "com.athiporn.sample_authorize_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNKholawx7tIzMeBbLUtybcf1Fg8kEebE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
