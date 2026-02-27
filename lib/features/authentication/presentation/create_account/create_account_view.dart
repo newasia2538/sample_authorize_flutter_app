@@ -4,10 +4,10 @@ import 'package:sample_authorize_app/configurations/route_path.dart';
 import 'package:sample_authorize_app/constant/constants.dart';
 import 'package:sample_authorize_app/constant/keys.dart';
 import 'package:sample_authorize_app/core/extensions/string_extensions.dart';
-import 'package:sample_authorize_app/presentation/create_account/create_account_view_provider.dart';
-import 'package:sample_authorize_app/presentation/widgets/common/circular_progress.dart';
-import 'package:sample_authorize_app/presentation/widgets/common/common_dialog.dart';
+import 'package:sample_authorize_app/presentation/common/circular_progress.dart';
+import 'package:sample_authorize_app/presentation/common/common_dialog.dart';
 
+import 'create_account_view_provider.dart';
 import 'create_account_view_state.dart';
 
 class CreateAccountView extends ConsumerStatefulWidget{

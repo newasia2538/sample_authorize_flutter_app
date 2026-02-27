@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sample_authorize_app/constant/constants.dart';
-import 'package:sample_authorize_app/core/provider.dart';
-import 'package:sample_authorize_app/services/auth_service.dart';
+import 'package:sample_authorize_app/features/authentication/auth_provider.dart';
 
 class HomeView extends ConsumerStatefulWidget{
   @override
@@ -50,8 +48,9 @@ class _HomeViewState extends ConsumerState<HomeView>{
   }
 
   void _signOut() async {
-    await authService.value.signOut();
-    if(mounted) ref.read(secureStorageProvider).deleteValueByKey(AppConstant.tokenKey);
+    await ref.read(authRepositoryProvider).signOut();
+    await ref.read(authControlerProvider.notifier).setSignOutState();
+    if(mounted) ref.read(appSecureStorageProvider).deleteValueByKey(AppConstant.tokenKey);
   }
 
 }

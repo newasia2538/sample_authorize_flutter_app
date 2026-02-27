@@ -2,23 +2,23 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class AppSecureStorageService{
 
-  final _storage = FlutterSecureStorage(aOptions: const AndroidOptions(
-    encryptedSharedPreferences: true,
-  ));
+  final FlutterSecureStorage storage;
 
-  Future<void> saveValueByKey(String key, String token) async {
-    await _storage.write(key: key, value: token);
+  AppSecureStorageService({required FlutterSecureStorage this.storage});
+
+  Future<void> saveValueByKey(String key, String value) async {
+    await storage.write(key: key, value: value);
   }
 
   Future<String?> getValueByKey(String key) async {
-    return await _storage.read(key: key);
+    return await storage.read(key: key);
   }
 
   Future<void> deleteValueByKey(String key) async {
-    await _storage.delete(key: key);
+    await storage.delete(key: key);
   }
 
   Future<void> deleteAll() async {
-    await _storage.deleteAll();
+    await storage.deleteAll();
   }
 }

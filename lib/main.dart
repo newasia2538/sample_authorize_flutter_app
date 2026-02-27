@@ -4,7 +4,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sample_authorize_app/presentation/sign_in/sign_in_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:sample_authorize_app/presentation/start_page.dart';
 import 'configurations/app_router.dart';
@@ -93,7 +92,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    final appColor = Theme.of(context).colorScheme;
     return Scaffold(body: SafeArea(child: Center(child: StartPage())));
   }
 }

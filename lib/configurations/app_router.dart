@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sample_authorize_app/configurations/route_path.dart';
-import 'package:sample_authorize_app/presentation/create_account/create_account_view.dart';
-import 'package:sample_authorize_app/presentation/sign_in/sign_in_view.dart';
+import 'package:sample_authorize_app/features/authentication/presentation/create_account/create_account_view.dart';
+import 'package:sample_authorize_app/features/authentication/presentation/sign_in/sign_in_view.dart';
 
 class AppRouter{
   static Route<dynamic> generateRoute(RouteSettings settings){

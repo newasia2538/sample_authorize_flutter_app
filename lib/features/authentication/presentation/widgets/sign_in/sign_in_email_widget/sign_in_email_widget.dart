@@ -1,14 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sample_authorize_app/constant/constants.dart';
 import 'package:sample_authorize_app/constant/keys.dart';
 import 'package:sample_authorize_app/core/extensions/string_extensions.dart';
-import 'package:sample_authorize_app/core/provider.dart';
+import 'package:sample_authorize_app/features/authentication/presentation/widgets/sign_in/sign_in_email_widget/sign_in_email_widget_provider.dart';
 import 'package:sample_authorize_app/gen/locale_keys.g.dart';
-import 'package:sample_authorize_app/presentation/widgets/sign_in/sign_in_email_widget/sign_in_email_widget_provider.dart';
-import 'package:sample_authorize_app/services/auth_service.dart';
+import 'package:sample_authorize_app/presentation/common/circular_progress.dart';
 
 class SignInEmailWidget extends ConsumerStatefulWidget {
   const SignInEmailWidget({super.key});
@@ -98,26 +96,15 @@ class _SignInEmailWidgetState extends ConsumerState<SignInEmailWidget> {
             ref.read(signInEmailProvider.notifier).validateEmail(emailTextFieldController.text);
             ref.read(signInEmailProvider.notifier).validatePassword(passwordTextFieldController.text);
             if(validateEmailErrorMessage.isNotNullOrEmpty() || validatePasswordErrorMessage.isNotNullOrEmpty()) return;
-            try{
-              final signInResult = await authService.value.signIn(email: emailTextFieldController.text, password: passwordTextFieldController.text);
-              if(signInResult.user != null){
-                print('User signed in:');
-                print('User ID: ${signInResult.user?.uid}');
-                print('User Email: ${signInResult.user?.email}');
-                print('Display Name: ${signInResult.user?.displayName}');
-                print('Email Verified: ${signInResult.user?.emailVerified}');
-                print('Is New User: ${signInResult.additionalUserInfo?.isNewUser}');
-                print('Provider ID: ${signInResult.credential?.providerId}');
 
-                final idToken = await signInResult.user?.getIdToken() ?? '';
-                if(mounted) ref.read(secureStorageProvider).saveValueByKey(AppConstant.tokenKey, idToken);
+            await showProgress(context);
+            final signInToken = await ref.read(signInEmailProvider.notifier).signIn(emailTextFieldController.text, passwordTextFieldController.text);
 
-                passwordTextFieldController.clear();
-                emailTextFieldController.clear();
-              }
-            } on FirebaseAuthException catch(e){
-              print('signIn error : ${e.message}');
-            }
+            await hideProgress();
+            if(signInToken.isNullOrEmpty()) return;
+
+            passwordTextFieldController.clear();
+            emailTextFieldController.clear();
           },
           child: Container(
             width: double.infinity,

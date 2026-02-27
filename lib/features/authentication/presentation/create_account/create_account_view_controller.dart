@@ -1,11 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_riverpod/legacy.dart';
-import 'package:sample_authorize_app/services/auth_service.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sample_authorize_app/features/authentication/auth_provider.dart';
 
 import 'create_account_view_state.dart';
 
-class CreateAccountViewController extends StateNotifier<CreateAccountViewState>{
-  CreateAccountViewController() : super(CreateAccountViewState());
+class CreateAccountViewController extends Notifier<CreateAccountViewState>{
 
   Future<void> createAccount({
     required String email,
@@ -13,7 +12,8 @@ class CreateAccountViewController extends StateNotifier<CreateAccountViewState>{
   }) async {
     try {
       state = state.copyWith(status: CreateAccountStatus.waiting);
-      await authService.value.createAccount(email: email, password: password);
+      await ref.read(authRepositoryProvider).createAccount(email, password);
+
       state = state.copyWith(status: CreateAccountStatus.success, authErrorMessage: '');
     } on FirebaseAuthException catch (e){
       state = state.copyWith(authErrorMessage: e.message, status: CreateAccountStatus.failed);
@@ -22,6 +22,11 @@ class CreateAccountViewController extends StateNotifier<CreateAccountViewState>{
 
   void toggleShowPasswordText() {
     state = state.copyWith(isShowPasswordText: !state.isShowPasswordText);
+  }
+
+  @override
+  CreateAccountViewState build() {
+    return CreateAccountViewState();
   }
 
 }

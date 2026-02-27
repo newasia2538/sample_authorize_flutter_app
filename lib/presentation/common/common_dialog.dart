@@ -20,7 +20,7 @@ class CommonDialog {
         barrierDismissible: true,
         context: context,
         builder: (context) {
-          return WillPopScope(onWillPop: () async => false, child: dialog);
+          return PopScope(child: dialog);
         }).then((value) {
       if (callBack != null) {
         callBack?.call();

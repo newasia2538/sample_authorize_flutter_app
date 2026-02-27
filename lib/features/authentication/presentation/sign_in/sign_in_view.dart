@@ -2,9 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sample_authorize_app/configurations/route_path.dart';
+import 'package:sample_authorize_app/features/authentication/presentation/widgets/sign_in/authorize_social_widget.dart';
+import 'package:sample_authorize_app/features/authentication/presentation/widgets/sign_in/sign_in_email_widget/sign_in_email_widget.dart';
 import 'package:sample_authorize_app/gen/locale_keys.g.dart';
-import 'package:sample_authorize_app/presentation/widgets/sign_in/authorize_social_widget.dart';
-import 'package:sample_authorize_app/presentation/widgets/sign_in/sign_in_email_widget/sign_in_email_widget.dart';
 
 class SignInView extends ConsumerStatefulWidget {
   const SignInView({super.key});
